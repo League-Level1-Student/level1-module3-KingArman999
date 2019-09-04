@@ -26,7 +26,12 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
  *   Right click your project and add it as a JAR (Under Java Build Path > Libraries).*/
 
 public class Jukebox implements Runnable , ActionListener {
-
+	JPanel p = new JPanel();
+	JFrame f = new JFrame();
+	JButton b= new JButton();
+	JButton b2= new JButton();
+	Song all= new Song("All Star - Smash Mouth [Lyrics].mp3");
+	Song never=new Song("Rick Astley - Never Gonna Give You Up (Video).mp3");
     public void run() {
 
 		// 1. Find an mp3 on your computer or on the Internet.
@@ -41,10 +46,6 @@ public class Jukebox implements Runnable , ActionListener {
 		 * cover is clicked, stop the currently playing song, and play the one
 		 * that was selected.
 		 */
-    	JPanel p = new JPanel();
-    	JFrame f = new JFrame();
-    	JButton b= new JButton();
-    	JButton b2= new JButton();
     	f.add(p);
     	p.add(b);
     	p.add(b2);
@@ -68,8 +69,14 @@ public class Jukebox implements Runnable , ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getSource()== b) {
-
+		if (e.getSource()== b2) {
+			all.stop();
+			never.stop();
+			all.play();
+		}else if(e.getSource()== b){
+			all.stop();
+			never.stop();
+			never.play();
 		}
 	}
 
@@ -81,7 +88,8 @@ class Song {
 	private String songAddress;
 	private AdvancedPlayer mp3Player;
 	private InputStream songStream;
-
+	
+	
 	/**
 	 * Songs can be constructed from files on your computer or Internet
 	 * addresses.
